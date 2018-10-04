@@ -1,5 +1,5 @@
 {
-  "name": "node-glfw",
+  "name": "@lfdoherty/node-glfw",
   "version": "0.4.6",
   "description": "A NodeJS wrapper around GLFW 3.x library",
   "main": "index.js",
@@ -17,7 +17,7 @@
       "twitter": "msevenier"
     }
   ],
-  "license" : "BSD-3-Clause",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "https://github.com/mikeseven/node-glfw.git"
