@@ -339,8 +339,6 @@ void APIENTRY keyCB(GLFWwindow *window, int key, int scancode, int action, int m
 
   int which=key, charCode=key;
 
-  cout<<"in keyCb before: "<<key<<endl;
-
   if(key>=GLFW_KEY_ESCAPE && key<=GLFW_KEY_LAST)
     key=jsKeyCode[key-GLFW_KEY_ESCAPE];
   else if(key==GLFW_KEY_SEMICOLON)  key=186;    // ;
@@ -363,8 +361,6 @@ void APIENTRY keyCB(GLFWwindow *window, int key, int scancode, int action, int m
     JS_STR(&actionNames[action << 3]), // event name
     evt
   };
-
-  cout<<"in keyCb after: "<<key<<endl;
 
   CallEmitter(2, argv);
 }
