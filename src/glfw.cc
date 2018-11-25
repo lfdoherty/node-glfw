@@ -252,11 +252,18 @@ static int jsKeyCode[]={
 /*GLFW_KEY_PAGE_DOWN*/    34,
 /*GLFW_KEY_HOME*/         36,
 /*GLFW_KEY_END*/          35,
+  0,0,0,0,0,0,0,0,0,0,
 /*GLFW_KEY_CAPS_LOCK*/    20,
 /*GLFW_KEY_SCROLL_LOCK*/  145,
 /*GLFW_KEY_NUM_LOCK*/     144,
 /*GLFW_KEY_PRINT_SCREEN*/ 144, /* TODO */
 /*GLFW_KEY_PAUSE*/        19,
+  0,
+  0,
+  0,
+  0,
+  0,
+//0,
 /*GLFW_KEY_F1*/           112,
 /*GLFW_KEY_F2*/           113,
 /*GLFW_KEY_F3*/           114,
@@ -282,6 +289,11 @@ static int jsKeyCode[]={
 /*GLFW_KEY_F23*/          123, /* unknown */
 /*GLFW_KEY_F24*/          123, /* unknown */
 /*GLFW_KEY_F25*/          123, /* unknown */
+  0,
+  0,
+  0,
+  0,
+  0,
 /*GLFW_KEY_KP_0*/         96,
 /*GLFW_KEY_KP_1*/         97,
 /*GLFW_KEY_KP_2*/         98,
@@ -299,6 +311,9 @@ static int jsKeyCode[]={
 /*GLFW_KEY_KP_ADD*/       107,
 /*GLFW_KEY_KP_ENTER*/     13,
 /*GLFW_KEY_KP_EQUAL*/     187,
+  0,
+  0,
+  0,
 /*GLFW_KEY_LEFT_SHIFT*/   16,
 /*GLFW_KEY_LEFT_CONTROL*/ 17,
 /*GLFW_KEY_LEFT_ALT*/     18,
@@ -324,6 +339,8 @@ void APIENTRY keyCB(GLFWwindow *window, int key, int scancode, int action, int m
 
   int which=key, charCode=key;
 
+  cout<<"in keyCb before: "<<key<<endl;
+
   if(key>=GLFW_KEY_ESCAPE && key<=GLFW_KEY_LAST)
     key=jsKeyCode[key-GLFW_KEY_ESCAPE];
   else if(key==GLFW_KEY_SEMICOLON)  key=186;    // ;
@@ -346,6 +363,8 @@ void APIENTRY keyCB(GLFWwindow *window, int key, int scancode, int action, int m
     JS_STR(&actionNames[action << 3]), // event name
     evt
   };
+
+  cout<<"in keyCb after: "<<key<<endl;
 
   CallEmitter(2, argv);
 }
