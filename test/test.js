@@ -47,6 +47,11 @@ glfw.events.on('resize',function(evt){
   log("[resize] "+evt.width+", "+evt.height);
 });
 
+
+glfw.events.on('drop',function(evt){
+  log("[drop] "+JSON.stringify(evt.paths));
+});
+
 //can only be called after window creation!
 var glVersion_major = glfw.GetWindowAttrib(window, glfw.CONTEXT_VERSION_MAJOR); 
 var glVersion_minor = glfw.GetWindowAttrib(window, glfw.CONTEXT_VERSION_MINOR); 

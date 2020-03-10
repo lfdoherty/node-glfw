@@ -425,10 +425,29 @@ void APIENTRY mouseButtonCB(GLFWwindow *window, int button, int action, int mods
   CallEmitter(2, argv);
 }
 
+void APIENTRY dropCB(GLFWwindow *window, int pathcount, const char* paths[]) {
+  Nan::HandleScope scope;
+
+  Local<Array> evt=Nan::New<Array>(1);
+
+  Local<Array> pathsJs=Nan::New<Array>(pathcount);
+  for(int i=0;i<pathcount;++i){
+      Nan::Set(pathsJs, i, JS_STR(paths[i]));
+  }
+  Nan::Set(evt, JS_STR("paths"),pathsJs);
+
+  Local<Value> argv[2] = {
+    JS_STR("drop"), // event name
+    evt
+  };
+
+  CallEmitter(2, argv);
+}
+
 void APIENTRY scrollCB(GLFWwindow *window, double xoffset, double yoffset) {
   Nan::HandleScope scope;
 
-  Local<Array> evt=Nan::New<Array>(3);
+  Local<Array> evt=Nan::New<Array>(4);
   Nan::Set(evt, JS_STR("type"),JS_STR("mousewheel"));
   Nan::Set(evt, JS_STR("wheelDeltaX"),JS_NUM(xoffset*120));
   Nan::Set(evt, JS_STR("wheelDeltaY"),JS_NUM(yoffset*120));
@@ -664,6 +683,7 @@ NAN_METHOD(glfw_CreateWindow) {
   glfwSetCursorPosCallback( window, cursorPosCB );
   glfwSetCursorEnterCallback( window, cursorEnterCB );
   glfwSetScrollCallback( window, scrollCB );
+  glfwSetDropCallback( window, dropCB );
 
   info.GetReturnValue().Set(JS_NUM((uint64_t) window));
 }
