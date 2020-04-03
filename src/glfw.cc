@@ -365,6 +365,21 @@ void APIENTRY keyCB(GLFWwindow *window, int key, int scancode, int action, int m
   CallEmitter(2, argv);
 }
 
+void APIENTRY characterCB(GLFWwindow *window, unsigned int codepoint) {
+
+  Nan::HandleScope scope;
+
+  Local<Array> evt=Nan::New<Array>(2);
+  Nan::Set(evt, JS_STR("type"), JS_STR("character"));
+  Nan::Set(evt, JS_STR("codepoint"),JS_INT(codepoint));
+
+  Local<Value> argv[2] = {
+    JS_STR("character"), // event name
+    evt
+  };
+
+  CallEmitter(2, argv);
+}
 void APIENTRY cursorPosCB(GLFWwindow* window, double x, double y) {
   int w,h;
   glfwGetWindowSize(window, &w, &h);
@@ -684,6 +699,8 @@ NAN_METHOD(glfw_CreateWindow) {
   glfwSetCursorEnterCallback( window, cursorEnterCB );
   glfwSetScrollCallback( window, scrollCB );
   glfwSetDropCallback( window, dropCB );
+
+  glfwSetCharCallback(window, characterCB);
 
   info.GetReturnValue().Set(JS_NUM((uint64_t) window));
 }
