@@ -31,12 +31,13 @@ NAN_METHOD(GetVersion) {
   Nan::HandleScope scope;
   int major, minor, rev;
   glfwGetVersion(&major,&minor,&rev);
-  Local<Array> arr=Nan::New<Array>(3);
+  Local<Object> arr=Nan::New<Object>();
   Nan::Set(arr, JS_STR("major"),JS_INT(major));
   Nan::Set(arr, JS_STR("minor"),JS_INT(minor));
   Nan::Set(arr, JS_STR("rev"),JS_INT(rev));
   info.GetReturnValue().Set(arr);
 }
+
 
 NAN_METHOD(GetVersionString) {
   Nan::HandleScope scope;
